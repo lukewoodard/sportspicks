@@ -1,3 +1,5 @@
 class Sport < ActiveRecord::Base
-  belongs_to :pick, :user_sport, :user_transaction_item
+  belongs_to :pick
+  belongs_to :user_sport
+  belongs_to :user_transaction_item
 end
