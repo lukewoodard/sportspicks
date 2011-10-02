@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  total: 1.5
+  discount_code: MyString
+  transaction_date: 2011-10-02
+
+two:
+  user_id: 1
+  total: 1.5
+  discount_code: MyString
+  transaction_date: 2011-10-02

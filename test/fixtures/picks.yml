@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sport_id: 1
+  game_date: 2011-10-02
+  description: MyString
+  pick: MyString
+  iswinnder: 
+
+two:
+  sport_id: 1
+  game_date: 2011-10-02
+  description: MyString
+  pick: MyString
+  iswinnder: 

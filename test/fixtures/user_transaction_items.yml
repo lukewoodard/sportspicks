@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sport_id: 1
+  usertransaction_id: 1
+  weeks: 1
+
+two:
+  sport_id: 1
+  usertransaction_id: 1
+  weeks: 1

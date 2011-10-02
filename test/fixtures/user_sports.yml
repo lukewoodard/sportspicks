@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  sport_id: 1
+  expiration_date: 2011-10-02
+
+two:
+  user_id: 1
+  sport_id: 1
+  expiration_date: 2011-10-02
