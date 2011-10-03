@@ -1,5 +1,5 @@
 label.hide { visibility: hidden; position: absolute; left: -9999px; }
-input { margin: 0 0 15px 0; -webkit-user-select: none; }
+input { margin: 0 0 15px 0;}
 .center { text-align: center; }
 .upper { text-transform: uppercase; }
 .hide  { visibility: hidden; }
