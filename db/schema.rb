@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111002185951) do
+ActiveRecord::Schema.define(:version => 20111002223339) do
 
   create_table "picks", :force => true do |t|
     t.integer  "sport_id",    :null => false
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20111002185951) do
     t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "encrypted_password"
+    t.string   "salt"
   end
 
 end

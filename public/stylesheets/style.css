@@ -1,0 +1,29 @@
+label.hide { visibility: hidden; position: absolute; left: -9999px; }
+input { margin: 0 0 15px 0; -webkit-user-select: none; }
+.center { text-align: center; }
+.upper { text-transform: uppercase; }
+.hide  { visibility: hidden; }
+h1:nth-of-type(1) {margin-top: 0px;}
+
+.ui-body-b .ui-link { color: #333; } 
+.ui-br { border-bottom: none; }
+
+input[name="security-code"] { margin-top: 10px;}
+
+
+#sign-in input:nth-of-type(1) { margin-top: 13px; }
+#create input:nth-of-type(1) { margin-top: 3px; }
+
+fieldset.move-down {margin-top: 50px;}
+
+.ui-grid-a input[type="tel"] { width: 87%;}
+
+#picks .ui-block-b h3 { padding-left: 10px;}
+
+.col1, .col2 { text-indent: 47px;}
+.expire { color: red;}
+
+.noLine { text-decoration: none;}
+
+
+#odds p { line-height: 3px;}

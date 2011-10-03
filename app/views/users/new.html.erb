@@ -1,0 +1,20 @@
+<div data-role="page" id="create" data-theme="b">  
+	<div data-role="content">
+		<h1 class="center upper">jbl sports<br />handicapping</h1>
+		<%= form_for(@user) do |f| %>
+		<%= render 'shared/error_messages', :object => f.object %>
+		<div data-role="fieldcontain">
+			<label for="name" class="hide">email</label>
+			<%= f.text_field :email, "data-theme" => "d", :placeholder => "email", :type => "email" %>
+			<label for="password" class="hide">password</label>
+			<%= f.text_field :password, "data-theme" => "d", :placeholder => "password", :type => "password" %>
+			<label for="confirm-password" class="hide">confirm password</label>
+			<%= f.text_field :password_confirmation, "data-theme" => "d", :placeholder => "confirm", :type => "password" %>
+			<fieldset class="ui-grid-a">
+				<div class="ui-block-a upper"><button type="button" data-theme="b" data-icon="arrow-l" data-iconpos="left" onclick="redirect_to('<%=signin_path%>')"><%= link_to "back", signin_path, "data-transition" => "flip", "data-direction" => "reverse" %></button></div>
+				<div class="ui-block-b upper"><%= f.submit "next", "data-theme" => "b", "data-icon" => "arrow-r", "data-iconpos" => "right"%></div>	   
+			</fieldset>
+		</div>
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,20 @@
+<!-- sign in -->
+
+<div data-role="page" id="sign-in" data-theme="b">  
+	<div data-role="content">
+		<h1 class="center upper">jbl sports<br />handicapping</h1>
+		<%= form_for(:session, :url => sessions_path) do |f| %>
+		<% flash.each do |key, value| %>
+			<label style="color:red"><%= value %></label><br>
+		<% end %>
+		<div data-role="fieldcontain">
+			<label for="name" class="hide">email</label>
+			<%= f.text_field :email, "data-theme" => "d", :placeholder => "email", :type => "email" %>
+			<label for="password" class="hide">password</label>
+			<%= f.text_field :password, "data-theme" => "d", :placeholder => "password", :type => "password" %>
+			<%= f.submit "SIGN IN", "data-theme" => "b" %>
+			<h4 class="center upper"><%= link_to "create account", signup_path, "data-transition" => "flip" %></h4>
+		</div>
+		<% end %>
+	</div> 
+</div>
