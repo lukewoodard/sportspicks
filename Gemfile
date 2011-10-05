@@ -6,6 +6,8 @@ gem 'rails', '3.0.10'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'ruby-mysql'
+gem 'rest-client'
+gem 'stripe', '1.5.18'
 
 # Use unicorn as the web server
 # gem 'unicorn'

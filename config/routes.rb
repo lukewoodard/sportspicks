@@ -1,18 +1,23 @@
 Sportspicks::Application.routes.draw do
   get "sessions/new"
   get "users/new"
-
-  resources :users
-  resources :sessions, :only => [:new, :create, :destroy]
-
   get "users/picks"
   get "users/selectsports"
+  get "users/charge"
+  get "users/success"
+  
+  resources :users
+  resources :sessions
   
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   match '/selectsports', :to => 'users#selectsports'
   match '/picks', :to => 'users#picks'
+  match '/selectsportscreate', :to => 'users#selectsportscreate'
+  match '/charge', :to => "users#charge"
+  match '/chargecreate', :to => "users#chargecreate"
+  match '/success', :to => "users#success"
   
   root :to => 'sessions#new'
   # The priority is based upon order of creation:

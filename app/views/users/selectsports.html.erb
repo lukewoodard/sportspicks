@@ -1,1 +1,68 @@
-<div style="padding:20px">Congrats clowns, you have created an account. <%= link_to "Click here", signin_path %> to sign in.</div>
+<script>
+	var costPerWeek = 9;
+	function ShowWeeks(id)
+	{
+		$("#amount" + id).toggle();
+		UpdateTotal();
+	}
+	
+	function UpdateTotal()
+	{
+		var total = 0;
+		$(".weeks:visible").each(function() {
+			total += parseInt($(this).val());
+		});
+		$("#total").html("$" + total*costPerWeek);
+	}
+</script>
+<%
+	total = 0
+	userTransaction = nil
+	if(@user.user_transactions.length > 0)
+		userTransaction = @user.user_transactions[0]
+		total = userTransaction.total.to_i
+	end
+%>
+<div data-role="page" id="select" data-theme="b">  
+	<div data-role="content">
+		<h1 class="center upper">jbl sports<br />handicapping</h1>
+		<h3 class="center">Choose your sports. <br />Each sport is $9 a week.</h3>
+		<% form_tag '/selectsportscreate' do %>
+		<% flash.each do |key, value| %>
+			<label style="color:red"><%= value %></label><br>
+		<% end %>
+		<div data-role="fieldcontain">
+			<% @sports.each do |sport| %>
+			<%
+				weeks = 1
+				display = "display:none"
+				checked = ""
+				if(userTransaction != nil)
+					userSport = userTransaction.user_transaction_items.select{|i| i.sport_id == sport.id}.first
+					
+					if(userSport != nil)
+						display = "display:block"
+						checked = "checked=checked"
+						weeks = userSport.weeks
+					end
+				end
+			%>
+		 	<fieldset data-role="controlgroup">
+				<input type="checkbox" <%=checked%> id="sport<%= sport.id %>" name="sport<%= sport.id%>" class="custom" onchange="ShowWeeks(<%=sport.id%>)" />
+				<label for="sport<%= sport.id %>"><%= sport.name %></label>
+			</fieldset>
+			<div style="<%=display%>" id="amount<%= sport.id %>">
+				<h4 class="center">How many weeks?</h4>
+		 		<input type="range" class="weeks" name="weeks<%=sport.id%>" id="weeks<%=sport.id%>" value="<%=weeks%>" min="1" max="12" onchange="UpdateTotal()"  />
+			</div>
+		    <% end %>
+			
+			<h3 class="center">Your Order: <label id="total">$<%=total%></label></h3>
+			<fieldset class="ui-grid-a">
+				<div class="ui-block-a upper"></div>
+				<div class="ui-block-b upper"><button type="submit" data-theme="b" data-icon="arrow-r" data-iconpos="right" class="next"><a href="order.html">next</a></button></div>	   
+			</fieldset>
+		</div>
+		<% end %>
+	</div> 
+</div>

@@ -1,0 +1,92 @@
+<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+<script type="text/javascript">
+    Stripe.setPublishableKey('<%= @appsettings.select{|s| s.key == "stripe_pub_key" }.first.value %>');
+
+	function chargeCard() {
+	    // disable the submit button to prevent repeated clicks
+	    $('.submit-button').attr("disabled", "disabled");
+
+	    var amount = <%=@user.user_transactions[0].total * 100%>; 
+	    Stripe.createToken({
+	        number: $('#credit-card-number').val(),
+	        cvc: $('#security-code').val(),
+	        exp_month: $('#month').val(),
+	        exp_year: $('#year').val()
+	    }, amount, stripeResponseHandler);
+
+	    // prevent the form from submitting with the default action
+	    return false;
+	}
+	
+	function stripeResponseHandler(status, response) {
+		$('.submit-button').removeAttr("disabled");
+	    if (response.error) {
+	        //show the errors on the form
+	        $("#error").html(response.error.message);
+	    } else {
+	        var form$ = $("#payment-form");
+	        // token contains id, last4, and card type
+	        var token = response['id'];
+	        // insert the token into the form so it gets submitted to the server
+	        form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+	        // and submit
+	        form$.get(0).submit();
+	    }
+	}
+</script>
+
+<div data-role="page" id="order" data-theme="b">  
+	<div data-role="content">
+		<h1 class="center upper">jbl sports<br />handicapping</h1>
+		<h4 class="center">Purchase your picks with our <br />simple and secure payment method.</h4>
+		<form action="/chargecreate" method="POST" id="payment-form">
+		<label style="color:red" id="error"><%= @errorMessage %></label><br>
+		<div data-role="fieldcontain">
+		    <label for="name" class="hide">credit card number</label>
+		    <input type="tel" data-theme="d" name="credit-card-number" id="credit-card-number" value=""  placeholder="credit card number" required>	
+			<fieldset class="ui-grid-a">
+				<div class="ui-block-a">							    
+				    <label for="month" class="month hide" data-theme="a">month</label>
+				    <select name="month" id="month">
+						<option value="1">January</option>
+						<option value="2">February</option>
+						<option value="3">March</option>
+						<option value="4">April</option>
+						<option value="5">May</option>
+						<option value="6">June</option>
+						<option value="7">July</option>
+						<option value="8">August</option>
+						<option value="9">September</option>
+						<option value="10">October</option>
+						<option value="11">November</option>
+						<option value="12">December</option>										
+					</select>
+				</div>
+				<div class="ui-block-b upper">
+				    <label for="year" class="year hide" data-theme="a">year</label>
+				    <select name="year" id="year">
+						<option value="2011">2011</option>
+						<option value="2012">2012</option>
+						<option value="2013">2013</option>
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+						<option value="2017">2017</option>
+						<option value="2018">2018</option>
+						<option value="2019">2019</option>
+						<option value="2020">2020</option>
+						<option value="2021">2021</option>										
+					</select>
+				</div>
+			</fieldset>		
+			<label for="name" class="hide">security code</label>
+			<input type="tel" data-theme="d" name="security-code" id="security-code" value=""  placeholder="security code" required>	    
+			<h3 class="center">Clicking Next will charge your card $<%= @user.user_transactions[0].total.to_i %></h3>
+			<fieldset class="ui-grid-a move-down">
+				<div class="ui-block-a upper"><button type="button" data-theme="b" data-icon="arrow-l" data-iconpos="left" onclick="redirect_to('<%=selectsports_path%>')"><%= link_to "back", selectsports_path, "data-transition" => "flip", "data-direction" => "reverse" %></button></div>
+				<div class="ui-block-b upper"><button type="button" onclick="chargeCard()" id="submit-button" class="submit-button" data-theme="b" data-icon="arrow-r" data-iconpos="right">next</button></div>	   
+			</fieldset>
+		</div>	
+		</form>
+	</div>				
+</div>
