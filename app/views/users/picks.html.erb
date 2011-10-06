@@ -1,1 +1,52 @@
-<div style="padding:20px">You will view your picks here</div>
+<script>
+	var selectedDate;
+	$(document).ready(function() {
+		selectedDate = $("#date").val();
+		loadPicks();
+	});
+	
+	function dateChanged()
+	{
+		if($("#date").val() != selectedDate)
+		{
+			selectedDate = $("#date").val();
+			loadPicks();
+		}
+	}
+	
+	function loadPicks()
+	{
+		var sportid = $("#sport-select").val();
+		var date = $("#date").val();
+		$.ajax({
+			url: '/sportspicks',
+			data: 'sportid=' + sportid + '&date=' + date,
+			type: 'GET',
+			success: function(data)
+			{
+				$("#sportspicks").html(data);
+				$("#sportspicks").page();
+				$("#sportspicks").removeClass("ui-body-c")
+			}
+		});
+	}
+</script>
+
+<div data-role="page" id="picks" data-theme="b">  
+	<div data-role="content">
+		<h1 class="center upper">jbl sports<br />handicapping</h1>
+		<div data-role="fieldcontain">
+			<label for="sport-select" class="select hide">choose a sport</label>
+			<select name="sport-select" id="sport-select" onchange="loadPicks()">
+				<%= @sports.each do |s| %>
+				<option value="<%=s.id%>"><%=s.name%></option>
+				<%end%>
+			</select>
+			<input type="date" data-them="b" name="date" id="date" data-role="datebox" data-options='{"mode": "calbox"}' value="<%=Date.today.to_s%>" onchange="dateChanged()">
+		</div>				
+		<div data-role="fieldcontain" id="sportspicks">
+			
+										
+		</div>
+	</div>
+</div>

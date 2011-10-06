@@ -1,3 +1,4 @@
 class Pick < ActiveRecord::Base
-  belongs_to :user_pick
+  has_many :user_picks
+  has_many :users, :through => :user_picks
 end

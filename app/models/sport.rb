@@ -1,7 +1,4 @@
 class Sport < ActiveRecord::Base
-  belongs_to :pick
-  belongs_to :user_sport
-  belongs_to :user_transaction_item
-  
-  attr_accessible :name, :description
+  has_many :user_sports
+  has_many :users, :through => :user_sports
 end

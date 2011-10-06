@@ -3,7 +3,7 @@ require 'stripe'
 class UsersController < ApplicationController
   before_filter :authenticate, :only => [:picks, :selectsports, :selectsportscreate, :charge, :chargecreate]
   before_filter :correct_user, :only => [:picks, :selectsports, :selectsportscreate, :charge, :chargecreate]
-  
+
   def new
     @user = User.new
     @title = "sign up"
@@ -27,6 +27,8 @@ class UsersController < ApplicationController
   
   def picks
     @title = "your picks"
+    @user = User.find(current_user.id, :include => :sports)
+    @sports = @user.sports
   end
   
   def index
@@ -105,6 +107,15 @@ class UsersController < ApplicationController
   def success
     @title = "success"
     @user = current_user
+  end
+  
+  def sportspicks
+    sport_id = params[:sportid].to_i
+    date = Date.parse(params[:date])
+    
+    @picks = Pick.select{|p| p.sport_id == sport_id && p.game_date == date}
+    
+    render :layout => false
   end
 
   private

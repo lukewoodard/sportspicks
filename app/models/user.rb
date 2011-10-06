@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   has_many :user_picks, :dependent => :destroy
-  has_many :user_sports, :dependent => :destroy
   has_many :user_transactions, :dependent => :destroy
   has_many :user_transaction_items, :through => :user_transactions
   has_many :picks, :through => :user_picks
+  
+  has_many :user_sports, :dependent => :destroy
   has_many :sports, :through => :user_sports
   
   attr_accessor :password, :password_confirmation

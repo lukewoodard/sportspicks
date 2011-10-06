@@ -1,0 +1,36 @@
+<% 
+	plays = @picks.select{|p| p.play == true}
+	opinions = @picks.select{|p| p.play == false }
+%>
+
+<h2>Plays</h2>
+
+<% if(plays.length == 0)%>
+No plays today
+<% else %>
+<% plays.each do |play| %>
+<div style="width:100%">
+	<label><%=play.description%></label><br>
+	<label><%=play.pick%></label>
+</div>
+<br>
+<% end %>
+<% end %>
+
+<h2>Opinions</h2>
+
+<% if(opinions.length == 0)%>
+No opinions today
+<% else %>
+<% opinions.each do |play| %>
+<div class="ui-grid-a">
+	<div class="ui-block-a">
+		<fieldset data-role="controlgroup">
+		<label><%=play.description%></label><br>
+		<label><%=play.pick%></label>
+		</fieldset>
+	</div>
+</div><!-- /grid-a -->
+
+<% end %>
+<% end %>
