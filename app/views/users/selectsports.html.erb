@@ -17,10 +17,8 @@
 </script>
 <%
 	total = 0
-	userTransaction = nil
-	if(@user.user_transactions.length > 0)
-		userTransaction = @user.user_transactions[0]
-		total = userTransaction.total.to_i
+	if(@transaction != nil)
+		total = @transaction.total.to_i
 	end
 %>
 <div data-role="page" id="select" data-theme="b">  
@@ -40,8 +38,8 @@
 				weeks = 1
 				display = "display:none"
 				checked = ""
-				if(userTransaction != nil)
-					userSport = userTransaction.user_transaction_items.select{|i| i.sport_id == sport.id}.first
+				if(@transaction != nil)
+					userSport = @transaction.user_transaction_items.select{|i| i.sport_id == sport.id}.first
 					
 					if(userSport != nil)
 						display = "display:block"

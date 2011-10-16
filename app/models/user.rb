@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :email, :presence => true, :format => { :with => email_regex }, :uniqueness => { :case_sensitive => false }
-  validates :password, :presence => true, :confirmation => true, :length => { :within => 6..40 }
+  validates :password, :presence => true, :length => { :within => 6..40 }, :if => :password_validation_required?
+  validates :password, :confirmation => true
   
   before_save :encrypt_password
   
@@ -49,5 +50,9 @@ class User < ActiveRecord::Base
   
   def secure_hash(string)
     Digest::SHA2::hexdigest(string)
+  end
+  
+  def password_validation_required?
+    encrypted_password.blank?
   end
 end

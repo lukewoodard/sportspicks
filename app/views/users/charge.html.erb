@@ -6,7 +6,7 @@
 	    // disable the submit button to prevent repeated clicks
 	    $('.submit-button').attr("disabled", "disabled");
 
-	    var amount = <%=@user.user_transactions[0].total * 100%>; 
+	    var amount = <%=@transaction.total * 100%>; 
 	    Stripe.createToken({
 	        number: $('#credit-card-number').val(),
 	        cvc: $('#security-code').val(),
@@ -85,7 +85,7 @@
 			</fieldset>		
 			<label for="name" class="hide">security code</label>
 			<input type="tel" data-theme="d" name="security-code" id="security-code" value=""  placeholder="security code" required>	    
-			<h3 class="center">Clicking Next will charge your card $<%= @user.user_transactions[0].total.to_i %></h3>
+			<h3 class="center">Clicking Next will charge your card $<%= @transaction.total.to_i %></h3>
 		</div>	
 		</form>
 	</div>				
