@@ -24,10 +24,13 @@
 	end
 %>
 <div data-role="page" id="select" data-theme="b">  
+	<div data-role="header">
+		<h2>Sports Handicapping</h2>
+		<a href="#" onclick="$('#selectsports').submit()" data-theme="b" data-icon="arrow-r" class="ui-btn-right">next</a>
+	</div>
 	<div data-role="content">
-		<h1 class="center upper">jbl sports<br />handicapping</h1>
 		<h3 class="center">Choose your sports. <br />Each sport is $9 a week.</h3>
-		<% form_tag '/selectsportscreate' do %>
+		<% form_tag '/selectsportscreate', :id => 'selectsports' do %>
 		<% flash.each do |key, value| %>
 			<label style="color:red"><%= value %></label><br>
 		<% end %>
@@ -58,10 +61,6 @@
 		    <% end %>
 			
 			<h3 class="center">Your Order: <label id="total">$<%=total%></label></h3>
-			<fieldset class="ui-grid-a">
-				<div class="ui-block-a upper"></div>
-				<div class="ui-block-b upper"><button type="submit" data-theme="b" data-icon="arrow-r" data-iconpos="right" class="next"><a href="order.html">next</a></button></div>	   
-			</fieldset>
 		</div>
 		<% end %>
 	</div> 

@@ -5,6 +5,13 @@ input { margin: 0 0 15px 0;}
 .hide  { visibility: hidden; }
 h1:nth-of-type(1) {margin-top: 0px;}
 
+.header {
+	text-align:center;
+}
+.header label {
+	line-height:41px;
+}
+
 .ui-body-b .ui-link { color: #333; } 
 .ui-br { border-bottom: none; }
 
@@ -27,3 +34,7 @@ fieldset.move-down {margin-top: 50px;}
 
 
 #odds p { line-height: 3px;}
+
+#sportspicks {
+	margin-left:20px;
+}

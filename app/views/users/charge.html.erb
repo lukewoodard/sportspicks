@@ -36,11 +36,15 @@
 </script>
 
 <div data-role="page" id="order" data-theme="b">  
+	<div data-role="header">
+		<%= link_to "back", selectsports_path, "data-transition" => "flip", "data-direction" => "reverse", "data-theme" => "b", "data-icon" => "arrow-l" %>
+		<h2>Sports Handicapping</h2>
+		<a href="#" onclick="chargeCard()" data-theme="b" data-icon="arrow-r">next</a>
+	</div>
 	<div data-role="content">
-		<h1 class="center upper">jbl sports<br />handicapping</h1>
 		<h4 class="center">Purchase your picks with our <br />simple and secure payment method.</h4>
 		<form action="/chargecreate" method="POST" id="payment-form">
-		<label style="color:red" id="error"><%= @errorMessage %></label><br>
+		<label style="color:red" id="error"><%= @errorMessage %></label>
 		<div data-role="fieldcontain">
 		    <label for="name" class="hide">credit card number</label>
 		    <input type="tel" data-theme="d" name="credit-card-number" id="credit-card-number" value=""  placeholder="credit card number" required>	
@@ -82,10 +86,6 @@
 			<label for="name" class="hide">security code</label>
 			<input type="tel" data-theme="d" name="security-code" id="security-code" value=""  placeholder="security code" required>	    
 			<h3 class="center">Clicking Next will charge your card $<%= @user.user_transactions[0].total.to_i %></h3>
-			<fieldset class="ui-grid-a move-down">
-				<div class="ui-block-a upper"><button type="button" data-theme="b" data-icon="arrow-l" data-iconpos="left" onclick="redirect_to('<%=selectsports_path%>')"><%= link_to "back", selectsports_path, "data-transition" => "flip", "data-direction" => "reverse" %></button></div>
-				<div class="ui-block-b upper"><button type="button" onclick="chargeCard()" id="submit-button" class="submit-button" data-theme="b" data-icon="arrow-r" data-iconpos="right">next</button></div>	   
-			</fieldset>
 		</div>	
 		</form>
 	</div>				

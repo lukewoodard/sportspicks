@@ -1,11 +1,14 @@
 <!-- sign in -->
 
 <div data-role="page" id="sign-in" data-theme="b">  
+	<div data-role="header">
+		<h2>Sports Handicapping</h2>
+	</div>
 	<div data-role="content">
-		<h1 class="center upper">jbl sports<br />handicapping</h1>
+		<div class="center">Log in below to access your picks</center>
 		<%= form_for(:session, :url => sessions_path) do |f| %>
 		<% flash.each do |key, value| %>
-			<label style="color:red"><%= value %></label><br>
+			<br><label style="color:red"><%= value %></label>
 		<% end %>
 		<div data-role="fieldcontain">
 			<label for="name" class="hide">email</label>

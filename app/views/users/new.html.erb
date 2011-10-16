@@ -1,6 +1,11 @@
 <div data-role="page" id="create" data-theme="b">  
+	<div data-role="header">
+		<%= link_to "back", signin_path, "data-transition" => "flip", "data-direction" => "reverse", "data-theme" => "b", "data-icon" => "arrow-l" %>
+		<h2>Sports Handicapping</h2>
+		<a href="#" onclick="$('#new_user').submit()" data-theme="b" data-icon="arrow-r">next</a>
+	</div>
 	<div data-role="content">
-		<h1 class="center upper">jbl sports<br />handicapping</h1>
+		Create your account below
 		<%= form_for(@user) do |f| %>
 		<%= render 'shared/error_messages', :object => f.object %>
 		<div data-role="fieldcontain">
@@ -10,10 +15,7 @@
 			<%= f.text_field :password, "data-theme" => "d", :placeholder => "password", :type => "password" %>
 			<label for="confirm-password" class="hide">confirm password</label>
 			<%= f.text_field :password_confirmation, "data-theme" => "d", :placeholder => "confirm", :type => "password" %>
-			<fieldset class="ui-grid-a">
-				<div class="ui-block-a upper"><button type="button" data-theme="b" data-icon="arrow-l" data-iconpos="left" onclick="redirect_to('<%=signin_path%>')"><%= link_to "back", signin_path, "data-transition" => "flip", "data-direction" => "reverse" %></button></div>
-				<div class="ui-block-b upper"><%= f.submit "next", "data-theme" => "b", "data-icon" => "arrow-r", "data-iconpos" => "right"%></div>	   
-			</fieldset>
+
 		</div>
 		<% end %>
 	</div>

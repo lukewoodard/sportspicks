@@ -2,7 +2,9 @@
 	var selectedDate;
 	$(document).ready(function() {
 		selectedDate = $("#date").val();
+		<% if @sports.length > 0 %>
 		loadPicks();
+		<% end %>
 	});
 	
 	function dateChanged()
@@ -18,35 +20,51 @@
 	{
 		var sportid = $("#sport-select").val();
 		var date = $("#date").val();
-		$.ajax({
-			url: '/sportspicks',
-			data: 'sportid=' + sportid + '&date=' + date,
-			type: 'GET',
-			success: function(data)
-			{
-				$("#sportspicks").html(data);
-				$("#sportspicks").page();
-				$("#sportspicks").removeClass("ui-body-c")
-			}
-		});
+		if(sportid > 0) {
+			$.ajax({
+				url: '/sportspicks',
+				data: 'sportid=' + sportid + '&date=' + date,
+				type: 'GET',
+				success: function(data)
+				{
+					$("#sportspicks").html(data);
+					$("#sportspicks").page();
+					$("#sportspicks").removeClass("ui-body-c")
+				}
+			});
+		} else {
+			window.location.href = '<%=selectsports_path%>';
+		}
 	}
 </script>
 
 <div data-role="page" id="picks" data-theme="b">  
+	<div data-role="header">
+		<h2>Sports Handicapping</h2>
+	</div>
 	<div data-role="content">
-		<h1 class="center upper">jbl sports<br />handicapping</h1>
+		<% if @sports.length == 0 %>
+		<div data-role="fieldcontain" class="center">
+			You have not purchased any picks.<br><br>
+			<%= link_to "PURCHASE PICKS NOW", selectsports_path, "data-transition" => "flip", "data-theme" => "b", "data-role" => "button" %>
+		</div>
+		<% else %>
 		<div data-role="fieldcontain">
 			<label for="sport-select" class="select hide">choose a sport</label>
 			<select name="sport-select" id="sport-select" onchange="loadPicks()">
 				<%= @sports.each do |s| %>
 				<option value="<%=s.id%>"><%=s.name%></option>
 				<%end%>
+				<option value="-1">[Add Sport]</option>
 			</select>
-			<input type="date" data-them="b" name="date" id="date" data-role="datebox" data-options='{"mode": "calbox"}' value="<%=Date.today.to_s%>" onchange="dateChanged()">
-		</div>				
-		<div data-role="fieldcontain" id="sportspicks">
+			<input type="date" data-theme="b" name="date" id="date" data-role="datebox" data-options='{"mode": "calbox"}' value="<%=Date.today.to_s%>" onchange="dateChanged()">
 			
-										
-		</div>
+			<div data-role="fieldcontain" id="sportspicks">
+
+
+			</div>
+			
+		</div>				
+		<% end %>
 	</div>
 </div>

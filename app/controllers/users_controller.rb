@@ -27,8 +27,8 @@ class UsersController < ApplicationController
   
   def picks
     @title = "your picks"
-    @user = User.find(current_user.id, :include => :sports)
-    @sports = @user.sports
+    @user = User.find(current_user.id, :include => :user_sports, :include => :sports)
+    @sports = @user.sports.select{|s| s.user_sports.first.expiration_date >= DateTime.now}
   end
   
   def index
