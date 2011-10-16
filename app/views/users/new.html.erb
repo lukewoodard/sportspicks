@@ -1,11 +1,11 @@
 <div data-role="page" id="create" data-theme="b">  
 	<div data-role="header">
 		<%= link_to "back", signin_path, "data-transition" => "flip", "data-direction" => "reverse", "data-theme" => "b", "data-icon" => "arrow-l" %>
-		<h2>Sports Handicapping</h2>
+		<h2>Sports Picks</h2>
 		<a href="#" onclick="$('#new_user').submit()" data-theme="b" data-icon="arrow-r">next</a>
 	</div>
 	<div data-role="content">
-		Create your account below
+		<div class="center">Create your account below</div>
 		<%= form_for(@user) do |f| %>
 		<%= render 'shared/error_messages', :object => f.object %>
 		<div data-role="fieldcontain">
