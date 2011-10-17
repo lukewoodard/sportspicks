@@ -172,6 +172,15 @@ class UsersController < ApplicationController
     end
     
   end
+  
+  def about
+    @title = "about"
+    @picks = Pick.find(:all, :include => :sport)
+  end
+  
+  def odds
+    @title = "live odds"
+  end
 
   private
 

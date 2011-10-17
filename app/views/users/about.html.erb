@@ -1,0 +1,37 @@
+<% 
+	sports = Array.new
+	@picks.each do |pick|
+		if(sports.find {|s| s.id == pick.sport_id} == nil)
+			sports.push pick.sport
+		end
+	end
+	
+%>
+
+<div data-role="page" id="about" data-theme="b"> 
+	<div data-role="header">
+		<h2>Sports Picks</h2>
+	</div> 
+	<div data-role="content">
+		<h4 class="center">We use a combination of computer algorithms and years of experience to bring you the best picks each week.</h4>
+		<h4 class="center">Our records below speak for themselves.</h4>
+		<h2>Plays</h2>
+		<% 
+			sports.each do |s|
+				w = @picks.count {|p| p.sport_id == s.id && p.play == true && p.iswinner == true }
+				l = @picks.count {|p| p.sport_id == s.id && p.play == true && p.iswinner == false && p.ispush == false }
+				p = @picks.count {|p| p.sport_id == s.id && p.play == true && p.ispush == true } 
+		%>
+				<h4><%=s.name%>: <%=w%> - <%=p%> - <%=l%></h4>
+		<% end %>
+		<h2>Opinions</h2>
+		<% 
+			sports.each do |s|
+				w = @picks.count {|p| p.sport_id == s.id && p.play == false && p.iswinner == true }
+				l = @picks.count {|p| p.sport_id == s.id && p.play == false && p.iswinner == false && p.ispush == false }
+				p = @picks.count {|p| p.sport_id == s.id && p.play == false && p.ispush == true } 
+		%>
+				<h4><%=s.name%>: <%=w%> - <%=p%> - <%=l%></h4>
+		<% end %>	
+		<div class="center">Contact us at <a href="mailto:sales@mysportshandicapping.com">sales@mysportshandicapping.com</a>
+	</div>

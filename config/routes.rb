@@ -25,6 +25,8 @@ Sportspicks::Application.routes.draw do
   match '/sportspicks', :to => "users#sportspicks"
   match '/account', :to => "users#account"
   match '/userupdate', :to => "users#update"
+  match '/about', :to => "users#about"
+  match '/odds', :to => "users#odds"
   
   root :to => 'sessions#new'
   # The priority is based upon order of creation:
